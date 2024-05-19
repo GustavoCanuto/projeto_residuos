@@ -75,5 +75,7 @@ END $$;
 
 select * from tb_transporte;
 
+select count(*) from tb_transporte;
+
 delete from tb_transporte;
 ALTER SEQUENCE tb_transporte_id_seq RESTART WITH 1;

@@ -87,10 +87,10 @@ create table TB_DESTINO(
 
 create table TB_TRANSPORTE (
      ID  serial,
-	 PLACA varchar not null UNIQUE,
+	 PLACA varchar not null ,
 	 CAPACIDADE decimal not null,
 	 ANO_FABRICACAO int,
-	 NUMERO_CHASSI varchar(50) UNIQUE,
+	 NUMERO_CHASSI varchar(50),
 	 FABRICANTE varchar,
      FK_EMPRESA int not null,
      
@@ -115,11 +115,24 @@ create table TB_LIXO(
     INDICE_RECICLABILIDADE int,
     CUSTO_DESCARTE decimal not null,
     
-    FK_MATERIAL int not null REFERENCES TB_MATERIAL(ID),
-    FK_DESTINO int not null REFERENCES TB_DESTINO(ID),
-    FK_TRATAMENTO int REFERENCES TB_TRATAMENTO(ID),
-    FK_TIPO_LIXO int not null REFERENCES TB_TIPO_LIXO(ID),
-    FK_TRANSPORTE int not null REFERENCES TB_TRANSPORTE(ID),
+    FK_MATERIAL int not null,
+    constraint FK_MATERIAL_TB_LIXO foreign key(FK_MATERIAL) references TB_MATERIAL(ID),
+     constraint NN_FK_MATERIAL_TB_LIXO check(FK_MATERIAL is not null),
+    
+    FK_DESTINO int not null,
+     constraint FK_DESTINO_TB_LIXO foreign key(FK_DESTINO) references TB_DESTINO(ID),
+     constraint NN_FK_DESTINO_TB_LIXO check(FK_DESTINO is not null),
+    
+    FK_TRATAMENTO int,
+    constraint FK_TRATAMENTO_TB_LIXO foreign key(FK_TRATAMENTO) references TB_TRATAMENTO(ID),
+    
+    FK_TIPO_LIXO int not null,
+       constraint FK_TIPO_LIXO_TB_LIXO foreign key(FK_TIPO_LIXO) references TB_TIPO_LIXO(ID),
+     constraint NN_FK_TIPO_LIXO_TB_LIXO check(FK_TIPO_LIXO is not null),
+     
+    FK_TRANSPORTE int not null ,
+    constraint FK_TRANSPORTE_TB_LIXO foreign key(FK_TRANSPORTE) references TB_TRANSPORTE(ID),
+     constraint NN_FK_TRANSPORTE_TB_LIXO check(FK_TRANSPORTE is not null),
     
     constraint NN_PESO_TB_LIXO check(PESO is not null),
     constraint NN_VOLUME_TB_LIXO check(VOLUME is not null),

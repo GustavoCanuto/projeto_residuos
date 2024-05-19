@@ -108,8 +108,8 @@ DECLARE
 BEGIN
     FOR i IN 1..10000 LOOP
         nome_empresa := 'Empresa ' || gerar_nome_aleatorio();
-        INSERT INTO tb_empresa (id, nome, cnpj, telefone, email, descricao)
-        VALUES (i, nome_empresa, gerar_cnpj_aleatorio(), gerar_numero_telefone_aleatorio(), gerar_email_aleatorio(nome_empresa), gerar_descricao_aleatoria());
+        INSERT INTO tb_empresa ( nome, cnpj, telefone, email, descricao)
+        VALUES ( nome_empresa, gerar_cnpj_aleatorio(), gerar_numero_telefone_aleatorio(), gerar_email_aleatorio(nome_empresa), gerar_descricao_aleatoria());
     END LOOP;
 END $$;
 
